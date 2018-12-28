@@ -6,7 +6,10 @@ import java.util.Scanner;
 
 public class Factory {
 
+    static final int SHIPMENT_CONTAINER_SIZE = 10;
+
     public static void main(String args[]) {
+
 
         Factory factory = new Factory();
         List<Widget> widgetsList = WidgetUtils.getSampleWidgets();
@@ -80,15 +83,15 @@ public class Factory {
 
         List<Shipment> shipmentsList = new ArrayList<Shipment>();
         int totalWidgets = widgetList.size();
-        int sizeTenShipments = totalWidgets/10;
-        int remainingWidgets = totalWidgets%10;
-        int startIndex = 0 ,endIndex = 10;
+        int sizeTenShipments = totalWidgets/SHIPMENT_CONTAINER_SIZE;
+        int remainingWidgets = totalWidgets%SHIPMENT_CONTAINER_SIZE;
+        int startIndex = 0 ,endIndex = SHIPMENT_CONTAINER_SIZE;
         while(sizeTenShipments >= 1) {
 
-            Shipment shipment = new Shipment(shipmentsList.size()+1,10,widgetList.subList(startIndex,endIndex));
+            Shipment shipment = new Shipment(shipmentsList.size()+1,SHIPMENT_CONTAINER_SIZE,widgetList.subList(startIndex,endIndex));
             shipmentsList.add(shipment);
-            startIndex+=10;
-            endIndex+=10;
+            startIndex+=SHIPMENT_CONTAINER_SIZE;
+            endIndex+=SHIPMENT_CONTAINER_SIZE;
             sizeTenShipments--;
         }
 
