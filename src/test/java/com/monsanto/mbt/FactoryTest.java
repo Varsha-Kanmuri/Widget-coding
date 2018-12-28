@@ -67,6 +67,53 @@ public class FactoryTest {
     }
 
     @Test
+    public void testShipment_Sorted_By_Color_And_Then_Date(){
+
+        List<Widget> sortedByColorAndDate = factory.sortByColorAndDate(widgets);
+        List<Shipment> shipmentByColorAndDate = factory.getFinalShipments(sortedByColorAndDate);
+        int shipmentSize = shipmentByColorAndDate.get(0).getSize();
+        assertEquals(10,shipmentSize);
+
+        Shipment firstShipment = shipmentByColorAndDate.get(0);
+
+        assertEquals(2, firstShipment.getWidgetsInShipment().get(0).getSerialNumber());
+        assertEquals(22, firstShipment.getWidgetsInShipment().get(1).getSerialNumber());
+        assertEquals(8, firstShipment.getWidgetsInShipment().get(2).getSerialNumber());
+        assertEquals(10, firstShipment.getWidgetsInShipment().get(3).getSerialNumber());
+        assertEquals(6, firstShipment.getWidgetsInShipment().get(4).getSerialNumber());
+        assertEquals(20, firstShipment.getWidgetsInShipment().get(5).getSerialNumber());
+        assertEquals(7, firstShipment.getWidgetsInShipment().get(6).getSerialNumber());
+        assertEquals(4, firstShipment.getWidgetsInShipment().get(7).getSerialNumber());
+        assertEquals(14, firstShipment.getWidgetsInShipment().get(8).getSerialNumber());
+        assertEquals(18, firstShipment.getWidgetsInShipment().get(9).getSerialNumber());
+
+    }
+
+    @Test
+    public void testShipment_Sorted_By_Date_And_Then_Color(){
+
+        List<Widget> sortedByDateAndColor = factory.sortByDateAndColor(widgets);
+        List<Shipment> shipmentByDateAndColor = factory.getFinalShipments(sortedByDateAndColor);
+        int shipmentSize = shipmentByDateAndColor.get(0).getSize();
+        assertEquals(10,shipmentSize);
+
+        Shipment firstShipment = shipmentByDateAndColor.get(0);
+       //We see order remains same as sorting by date since all dates present in sample widgetsUtils class are unique
+        assertEquals(9, firstShipment.getWidgetsInShipment().get(0).getSerialNumber());
+        assertEquals(19, firstShipment.getWidgetsInShipment().get(1).getSerialNumber());
+        assertEquals(1, firstShipment.getWidgetsInShipment().get(2).getSerialNumber());
+        assertEquals(21, firstShipment.getWidgetsInShipment().get(3).getSerialNumber());
+        assertEquals(3, firstShipment.getWidgetsInShipment().get(4).getSerialNumber());
+        assertEquals(23, firstShipment.getWidgetsInShipment().get(5).getSerialNumber());
+        assertEquals(2, firstShipment.getWidgetsInShipment().get(6).getSerialNumber());
+        assertEquals(22, firstShipment.getWidgetsInShipment().get(7).getSerialNumber());
+        assertEquals(7, firstShipment.getWidgetsInShipment().get(8).getSerialNumber());
+        assertEquals(17, firstShipment.getWidgetsInShipment().get(9).getSerialNumber());
+
+    }
+
+
+    @Test
     public void testShipment_Sorted_By_Color_Or_Date_With_Size_Less_Than_Ten() {
 
         List<Widget> sortedByColor = factory.sortByDate(widgets);
