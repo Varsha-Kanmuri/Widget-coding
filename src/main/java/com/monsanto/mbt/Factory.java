@@ -12,7 +12,7 @@ public class Factory {
         List<Widget> widgetsList = WidgetUtils.getSampleWidgets();
 
         if(widgetsList.size() > 0) {
-            System.out.println("Enter your choice to create shipment 1 -> Color or 2 -> Date :");
+            System.out.println("Enter your choice to create shipment 1 -> Color or 2 -> Date : or 3 -> Color and then Date or 4 -> Date and then Color");
             Scanner scanner =  new Scanner(System.in);
             try {
                 int choice = scanner.nextInt();
@@ -28,6 +28,19 @@ public class Factory {
                         List<Shipment> shipmentByDate = factory.getFinalShipments(sortedByDate);
                         factory.printShipmentsList(shipmentByDate);
                         break;
+
+                    case 3:
+                        List<Widget> sortedByColorAndDate = factory.sortByColorAndDate(widgetsList);
+                        List<Shipment> shipmentByColorAndDate = factory.getFinalShipments(sortedByColorAndDate);
+                        factory.printShipmentsList(shipmentByColorAndDate);
+                        break;
+
+                    case 4:
+                        List<Widget> sortedByDateAndColor = factory.sortByDateAndColor(widgetsList);
+                        List<Shipment> shipmentByDateAndColor = factory.getFinalShipments(sortedByDateAndColor);
+                        factory.printShipmentsList(shipmentByDateAndColor);
+                        break;
+
                     default:
                         System.out.println("Please enter a valid choice 1 or 2");
                 }
@@ -49,6 +62,17 @@ public class Factory {
     public List<Widget> sortByDate(List<Widget> widgetsList) {
 
         widgetsList.sort(Comparator.comparing(Widget::getProductionDate));
+        return widgetsList;
+    }
+
+    public List<Widget> sortByColorAndDate(List<Widget> widgetsList) {
+        widgetsList.sort(Comparator.comparing(Widget::getColor).thenComparing(Widget::getProductionDate));
+        return widgetsList;
+    }
+
+    public List<Widget> sortByDateAndColor(List<Widget> widgetsList) {
+
+        widgetsList.sort(Comparator.comparing(Widget::getProductionDate).thenComparing(Widget::getColor));
         return widgetsList;
     }
 
